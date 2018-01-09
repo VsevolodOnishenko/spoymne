@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class PlayerViewController: UIViewController {
+class PlayerViewController: BaseViewController {
     
     @IBOutlet private weak var songLogo: UIImageView!
     @IBOutlet private weak var songNameLabel: UILabel!

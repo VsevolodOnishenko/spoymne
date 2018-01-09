@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchSongViewController: UIViewController {
+class SearchSongViewController: BaseViewController {
     
     @IBOutlet private weak var songsTableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
@@ -25,7 +25,6 @@ class SearchSongViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         songsTableView.delegate = self
         songsTableView.dataSource = self
         searchBar.delegate = self

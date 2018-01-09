@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C7BBECBB2004D4E100A55ED2 /* SongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BBECBA2004D4E100A55ED2 /* SongModel.swift */; };
+		C7BBECBD20050FB700A55ED2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BBECBC20050FB700A55ED2 /* BaseViewController.swift */; };
 		C7D2CAE21FFFABEA00595650 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D2CAE11FFFABEA00595650 /* AppDelegate.swift */; };
 		C7D2CAE41FFFABEA00595650 /* SearchSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D2CAE31FFFABEA00595650 /* SearchSongViewController.swift */; };
 		C7D2CAEA1FFFABEA00595650 /* SpoyMne.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7D2CAE81FFFABEA00595650 /* SpoyMne.xcdatamodeld */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		C7BBECBA2004D4E100A55ED2 /* SongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongModel.swift; sourceTree = "<group>"; };
+		C7BBECBC20050FB700A55ED2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C7D2CADE1FFFABEA00595650 /* SpoyMne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpoyMne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D2CAE11FFFABEA00595650 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7D2CAE31FFFABEA00595650 /* SearchSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSongViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D2CAE11FFFABEA00595650 /* AppDelegate.swift */,
+				C7BBECBC20050FB700A55ED2 /* BaseViewController.swift */,
 				C7D2CAE31FFFABEA00595650 /* SearchSongViewController.swift */,
 				C7D2CAFA200004DA00595650 /* PlayerViewController.swift */,
 				C7D2CB062003185C00595650 /* NetworkService.swift */,
@@ -160,6 +163,7 @@
 				C7BBECBB2004D4E100A55ED2 /* SongModel.swift in Sources */,
 				C7D2CAFE200007E700595650 /* SongTableViewCell.swift in Sources */,
 				C7D2CAE21FFFABEA00595650 /* AppDelegate.swift in Sources */,
+				C7BBECBD20050FB700A55ED2 /* BaseViewController.swift in Sources */,
 				C7D2CB072003185C00595650 /* NetworkService.swift in Sources */,
 				C7D2CAEA1FFFABEA00595650 /* SpoyMne.xcdatamodeld in Sources */,
 			);

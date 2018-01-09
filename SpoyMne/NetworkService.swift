@@ -6,9 +6,9 @@
 //  Copyright © 2018 Vsevolod Onishchenko. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class NetworkService: NSObject {
+class NetworkService {
     
     let baseUrl = "https://api.deezer.com/search?q="
     
