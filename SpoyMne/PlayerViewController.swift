@@ -29,7 +29,8 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        songLogo.contentMode = .scaleAspectFit
+        configureSongImage()
+
         guard let songToPlay = song else { return }
 
         do {
@@ -42,6 +43,14 @@ class PlayerViewController: UIViewController {
         catch {
             print(error)
         }
+    }
+    
+    private func configureSongImage(){
+        songLogo.contentMode = .scaleAspectFit
+        songLogo.layer.shadowColor = UIColor.black.cgColor
+        songLogo.layer.shadowOpacity = 1
+        songLogo.layer.shadowOffset = CGSize.zero
+        songLogo.layer.shadowRadius = 10
     }
     
     private func configureSongPresentation(songToPlay: SongModel) {
