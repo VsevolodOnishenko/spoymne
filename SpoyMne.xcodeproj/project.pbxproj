@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C710F62120054C4F00664FAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C710F62020054C4F00664FAA /* Main.storyboard */; };
 		C7BBECBB2004D4E100A55ED2 /* SongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BBECBA2004D4E100A55ED2 /* SongModel.swift */; };
 		C7BBECBD20050FB700A55ED2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BBECBC20050FB700A55ED2 /* BaseViewController.swift */; };
 		C7D2CAE21FFFABEA00595650 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D2CAE11FFFABEA00595650 /* AppDelegate.swift */; };
 		C7D2CAE41FFFABEA00595650 /* SearchSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D2CAE31FFFABEA00595650 /* SearchSongViewController.swift */; };
 		C7D2CAEA1FFFABEA00595650 /* SpoyMne.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7D2CAE81FFFABEA00595650 /* SpoyMne.xcdatamodeld */; };
 		C7D2CAEF1FFFABEA00595650 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7D2CAED1FFFABEA00595650 /* LaunchScreen.storyboard */; };
-		C7D2CAF91FFFAD7800595650 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7D2CAF81FFFAD7800595650 /* Main.storyboard */; };
 		C7D2CAFB200004DA00595650 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D2CAFA200004DA00595650 /* PlayerViewController.swift */; };
 		C7D2CAFE200007E700595650 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D2CAFC200007E700595650 /* SongTableViewCell.swift */; };
 		C7D2CAFF200007E700595650 /* SongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D2CAFD200007E700595650 /* SongTableViewCell.xib */; };
@@ -22,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C710F62020054C4F00664FAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C7BBECBA2004D4E100A55ED2 /* SongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongModel.swift; sourceTree = "<group>"; };
 		C7BBECBC20050FB700A55ED2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C7D2CADE1FFFABEA00595650 /* SpoyMne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpoyMne.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,7 +31,6 @@
 		C7D2CAE91FFFABEA00595650 /* SpoyMne.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SpoyMne.xcdatamodel; sourceTree = "<group>"; };
 		C7D2CAEE1FFFABEA00595650 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7D2CAF01FFFABEA00595650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C7D2CAF81FFFAD7800595650 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../.Trash/Main.storyboard; sourceTree = "<group>"; };
 		C7D2CAFA200004DA00595650 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		C7D2CAFC200007E700595650 /* SongTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		C7D2CAFD200007E700595650 /* SongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
@@ -75,7 +75,7 @@
 				C7D2CB062003185C00595650 /* NetworkService.swift */,
 				C7BBECBA2004D4E100A55ED2 /* SongModel.swift */,
 				C7D2CAFC200007E700595650 /* SongTableViewCell.swift */,
-				C7D2CAF81FFFAD7800595650 /* Main.storyboard */,
+				C710F62020054C4F00664FAA /* Main.storyboard */,
 				C7D2CAFD200007E700595650 /* SongTableViewCell.xib */,
 				C7D2CAED1FFFABEA00595650 /* LaunchScreen.storyboard */,
 				C7D2CB04200105FC00595650 /* Assets.xcassets */,
@@ -146,8 +146,8 @@
 			files = (
 				C7D2CAFF200007E700595650 /* SongTableViewCell.xib in Resources */,
 				C7D2CAEF1FFFABEA00595650 /* LaunchScreen.storyboard in Resources */,
-				C7D2CAF91FFFAD7800595650 /* Main.storyboard in Resources */,
 				C7D2CB05200105FC00595650 /* Assets.xcassets in Resources */,
+				C710F62120054C4F00664FAA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
