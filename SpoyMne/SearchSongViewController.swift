@@ -74,6 +74,13 @@ extension SearchSongViewController: UITableViewDelegate, UITableViewDataSource {
         playerView.song = songs[indexPath.row]
         navigationController?.pushViewController(playerView, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1.0)
+        UIView.animate(withDuration: 0.5, animations: {
+            cell.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
+        }, completion: nil)
+    }
 }
 
 extension SearchSongViewController: UISearchBarDelegate {

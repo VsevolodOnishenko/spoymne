@@ -11,6 +11,8 @@ import AVFoundation
 
 class PlayerViewController: BaseViewController {
     
+    @IBOutlet var successView: UIView!
+ 
     @IBOutlet private weak var songLogo: UIImageView!
     @IBOutlet private weak var songNameLabel: UILabel!
     @IBOutlet private weak var artistNameLabel: UILabel!
@@ -29,6 +31,7 @@ class PlayerViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureSuccessView()
         configureSongImage()
 
         guard let songToPlay = song else { return }
@@ -65,6 +68,38 @@ class PlayerViewController: BaseViewController {
     
     @IBAction func pauseButtonPressed(_ sender: Any) {
         audioPlayer.pause()
+    }
+    
+    @IBAction func addToFavoriteButtonPressed(_ sender: Any) {
+        animateIn()
+    }
+    
+    @IBAction func closeSuccessViewButtonPressed(_ sender: Any) {
+        animateOut()
+    }
+    
+    private func configureSuccessView() {
+        successView.layer.cornerRadius = 10
+    }
+    
+    private func animateOut() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.successView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            self.successView.alpha = 0
+        }) { (success) in
+            self.successView.removeFromSuperview()
+        }
+    }
+    
+    private func animateIn() {
+        self.view.addSubview(successView)
+        successView.center = self.view.center
+        successView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+        successView.alpha = 0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.successView.alpha = 1
+            self.successView.transform = CGAffineTransform.identity
+        }, completion: nil)
     }
     
     private func convertSongDuration(for duration: Double) -> String {
