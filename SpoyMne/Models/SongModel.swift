@@ -8,10 +8,10 @@
 
 class SongModel {
     
-    let artistName: String
-    let songName: String
-    let songUrl: String
-    let songImage: String
+    var artistName: String
+    var songName: String
+    var songUrl: String
+    var songImage: String
     
     init(artistName: String, songName: String, songUrl: String, songImage: String) {
         self.artistName = artistName

@@ -8,11 +8,12 @@
 
 import UIKit
 import AVFoundation
+import UIKit.UIGestureRecognizerSubclass
 
 class PlayerViewController: BaseViewController {
     
-    @IBOutlet var successView: UIView!
- 
+    @IBOutlet private var successView: UIView!
+    
     @IBOutlet private weak var songLogo: UIImageView!
     @IBOutlet private weak var songNameLabel: UILabel!
     @IBOutlet private weak var artistNameLabel: UILabel!
@@ -20,6 +21,7 @@ class PlayerViewController: BaseViewController {
     @IBOutlet private weak var playButton: UIButton!
     @IBOutlet private weak var pauseButton: UIButton!
     @IBOutlet private weak var addToFavoriteButton: UIButton!
+    @IBOutlet private weak var openPlaylistButton: UIButton!
     @IBOutlet private weak var songDurationLabel: UILabel!
     @IBOutlet private weak var songTimerLabel: UILabel! {
         didSet {
@@ -31,8 +33,8 @@ class PlayerViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureSuccessView()
         configureSongImage()
+        configureSuccessView()
 
         guard let songToPlay = song else { return }
 
@@ -46,6 +48,13 @@ class PlayerViewController: BaseViewController {
         catch {
             print(error)
         }
+    }
+
+    private func openPlaylist() {
+        let s = storyboard?.instantiateViewController(withIdentifier: "FavoriteSongsCollection")
+        guard let playlistView = s as? FavoriteSongsCollection else { return }
+        playlistView.delegate = self
+        navigationController?.pushViewController(playlistView, animated: true)
     }
     
     private func configureSongImage(){
@@ -62,19 +71,26 @@ class PlayerViewController: BaseViewController {
         artistNameLabel.text = songToPlay.artistName
     }
     
-    @IBAction func playButtonPressed(_ sender: Any) {
+    @IBAction private func playButtonPressed(_ sender: Any) {
         audioPlayer.play()
     }
     
-    @IBAction func pauseButtonPressed(_ sender: Any) {
+    @IBAction private func pauseButtonPressed(_ sender: Any) {
         audioPlayer.pause()
     }
     
-    @IBAction func addToFavoriteButtonPressed(_ sender: Any) {
+    @IBAction private func addToFavoriteButtonPressed(_ sender: Any) {
+        guard let favoriteSong = song else { return }
+        let storage = CoreDataService()
+        storage.saveSong(favoriteSong)
         animateIn()
     }
+
+    @IBAction private func openPlaylistButtonPressed(_ sender: Any) {
+        openPlaylist()
+    }
     
-    @IBAction func closeSuccessViewButtonPressed(_ sender: Any) {
+    @IBAction private func closeSuccessViewButtonPressed(_ sender: Any) {
         animateOut()
     }
     
@@ -121,7 +137,7 @@ class PlayerViewController: BaseViewController {
         }
     }
     
-    @IBAction func changeAudioTime(_ sender: Any) {
+    @IBAction private func changeAudioTime(_ sender: Any) {
         audioPlayer.pause()
         audioPlayer.currentTime = TimeInterval(songDurationSlider.value)
         audioPlayer.prepareToPlay()
@@ -137,6 +153,21 @@ extension String {
     }
 }
 
+extension PlayerViewController: ChangePlayingSongProtocol {
+    func changePlayingSong(song: SongModel) {
+        audioPlayer.stop()
+        do {
+            audioPlayer = try AVAudioPlayer(data: song.songUrl.getDataFromUrl())
+            songDurationLabel.text = convertSongDuration(for: audioPlayer.duration)
+            songDurationSlider.maximumValue = Float(audioPlayer.duration)
+            configureSongPresentation(songToPlay: song)
+            audioPlayer.play()
+        }
+        catch {
+            print(error)
+        }
+    }
+}
 
 
 
