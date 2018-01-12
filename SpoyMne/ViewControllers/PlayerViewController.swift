@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-import UIKit.UIGestureRecognizerSubclass
 
 class PlayerViewController: BaseViewController {
     
@@ -35,9 +34,11 @@ class PlayerViewController: BaseViewController {
         super.viewDidLoad()
         configureSongImage()
         configureSuccessView()
-
         guard let songToPlay = song else { return }
+        configurePlayer(with: songToPlay)
+    }
 
+    func configurePlayer(with songToPlay: SongModel) {
         do {
             audioPlayer = try AVAudioPlayer(data: songToPlay.songUrl.getDataFromUrl())
             songDurationLabel.text = convertSongDuration(for: audioPlayer.duration)
@@ -145,27 +146,10 @@ class PlayerViewController: BaseViewController {
     }
 }
 
-extension String {
-    func getDataFromUrl() -> Data {
-        guard let url = URL.init(string: self),
-            let data = NSData(contentsOf: url) else { return Data() }
-        return data as Data
-    }
-}
-
 extension PlayerViewController: ChangePlayingSongProtocol {
     func changePlayingSong(song: SongModel) {
         audioPlayer.stop()
-        do {
-            audioPlayer = try AVAudioPlayer(data: song.songUrl.getDataFromUrl())
-            songDurationLabel.text = convertSongDuration(for: audioPlayer.duration)
-            songDurationSlider.maximumValue = Float(audioPlayer.duration)
-            configureSongPresentation(songToPlay: song)
-            audioPlayer.play()
-        }
-        catch {
-            print(error)
-        }
+        configurePlayer(with: song)
     }
 }
 

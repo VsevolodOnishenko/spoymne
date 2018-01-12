@@ -40,10 +40,14 @@ class FavoriteSongsCollection: BaseViewController {
         let store = CoreDataService()
         store.fetchSong { [weak self] (songs) in
             for song in songs {
-                let castSong = SongModel(artistName: song.artistName!,
-                                         songName: song.songName!,
-                                         songUrl: song.songUrl!,
-                                         songImage: song.songImage!)
+                guard let artist = song.artistName,
+                    let name = song.songName,
+                    let image = song.songImage,
+                    let url = song.songUrl else { return }
+                let castSong = SongModel(artistName: artist,
+                                         songName: name,
+                                         songUrl: url,
+                                         songImage: image)
                 self?.favoriteSongs.append(castSong)
             }
         }
@@ -65,18 +69,9 @@ extension FavoriteSongsCollection: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let myDelegate = delegate else { return }
-        myDelegate.changePlayingSong(song: favoriteSongs[indexPath.row])
+        guard let collectionDelegate = delegate else { return }
+        collectionDelegate.changePlayingSong(song: favoriteSongs[indexPath.row])
         self.performSegueToReturnBack()
     }
 }
 
-extension FavoriteSongsCollection {
-    func performSegueToReturnBack()  {
-        if let nav = self.navigationController {
-            nav.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
-}

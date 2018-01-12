@@ -21,5 +21,4 @@ extension Song {
     @NSManaged public var songImage: String?
     @NSManaged public var songName: String?
     @NSManaged public var songUrl: String?
-
 }

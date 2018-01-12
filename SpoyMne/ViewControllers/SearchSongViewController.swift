@@ -84,7 +84,6 @@ extension SearchSongViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SearchSongViewController: UISearchBarDelegate {
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         pendingRequestWorkItem?.cancel()
         songs.removeAll()

@@ -13,7 +13,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let background = UIImage(named:"background") else { return }
-        self.view.contentMode = .scaleToFill
+        self.view.contentMode = .scaleAspectFill
         self.view.backgroundColor = UIColor(patternImage: background)
     }
 }
