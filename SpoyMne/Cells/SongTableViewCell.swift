@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+/**
+ Класс кастомной ячейки для таблицы поиска
+ */
 final class SongTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var songNameLabel: UILabel!

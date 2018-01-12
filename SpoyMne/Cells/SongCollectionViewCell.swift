@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+/**
+ Класс кастомной ячейки для плэйлиста
+ */
 class SongCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var songCover: UIImageView!

@@ -11,7 +11,9 @@ import UIKit
 protocol ChangePlayingSongProtocol: class {
     func changePlayingSong(song: SongModel)
 }
-
+/**
+ Класс отвечает за экран плэйлиста пользователя
+ */
 class FavoriteSongsCollection: BaseViewController {
     
     @IBOutlet weak var favoriteSongsCollection: UICollectionView!
@@ -30,12 +32,16 @@ class FavoriteSongsCollection: BaseViewController {
         registerCell()
         fetchDataFromStore()
     }
-    
+    /**
+    Метод регистрации кастомной ячейки
+    */
     private func registerCell() {
         let nibName = UINib(nibName: "SongCollectionViewCell", bundle: nil)
         favoriteSongsCollection.register(nibName, forCellWithReuseIdentifier: "songCollectionCell")
     }
-    
+    /**
+     Функция получения песен из хранилища
+     */
     private func fetchDataFromStore() {
         let store = CoreDataService()
         store.fetchSong { [weak self] (songs) in
@@ -55,6 +61,7 @@ class FavoriteSongsCollection: BaseViewController {
     
 }
 
+// MARK: DataSource and Delegate implementation
 extension FavoriteSongsCollection: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return favoriteSongs.count

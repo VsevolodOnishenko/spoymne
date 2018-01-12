@@ -7,7 +7,10 @@
 //
 
 import Foundation
-
+/**
+ Расширение FavoriteSongsCollection, которое которое позволяет вернуться
+ назад по иерархии представлений при нажатии на ячейку в плэйлисте
+ */
 extension FavoriteSongsCollection {
     func performSegueToReturnBack()  {
         if let nav = self.navigationController {

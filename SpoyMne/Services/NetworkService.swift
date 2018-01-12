@@ -7,7 +7,9 @@
 //
 
 import Foundation
-
+/**
+ Сервис с методам запроса по API
+ */
 class NetworkService {
     
     let baseUrl = "https://api.deezer.com/search?q="

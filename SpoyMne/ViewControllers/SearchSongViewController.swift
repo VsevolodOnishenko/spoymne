@@ -7,8 +7,10 @@
 //
 
 import UIKit
-
-class SearchSongViewController: BaseViewController {
+/**
+ Класс отвечает за экран поиска
+*/
+final class SearchSongViewController: BaseViewController {
     
     @IBOutlet private weak var songsTableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
@@ -31,7 +33,9 @@ class SearchSongViewController: BaseViewController {
         searchBar.placeholder = "Let`s search!"
         registerCell()
     }
-    
+    /**
+     Распаковка полученных данных по API и добавление их в массив найденный треков
+    */
     private func getSearchResultsInformation(from dict: [String: Any]) {
         guard let songName = dict["title"] as? String,
             let artist = dict["artist"] as? [String: Any],
@@ -46,13 +50,15 @@ class SearchSongViewController: BaseViewController {
                              songImage: albumCover)
         songs.append(song)
     }
-    
+    /**
+     Регистрация кастомной ячейки
+    */
     private func registerCell() {
         let nibName = UINib(nibName: "SongTableViewCell", bundle: nil)
         songsTableView.register(nibName, forCellReuseIdentifier: "cell")
     }
 }
-
+// MARK: UITableView DataSource and Delegate implementation
 extension SearchSongViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,8 +88,9 @@ extension SearchSongViewController: UITableViewDelegate, UITableViewDataSource {
         }, completion: nil)
     }
 }
-
+// MARK: UISearchBarDelegate implementation
 extension SearchSongViewController: UISearchBarDelegate {
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         pendingRequestWorkItem?.cancel()
         songs.removeAll()

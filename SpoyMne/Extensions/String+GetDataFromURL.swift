@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+Расширение типа String, которое преобразовывает строку в урл,
+получает по нему контент и возращает как Data
+*/
 extension String {
     func getDataFromUrl() -> Data {
         guard let url = URL.init(string: self),

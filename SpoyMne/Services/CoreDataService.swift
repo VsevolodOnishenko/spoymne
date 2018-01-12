@@ -8,7 +8,9 @@
 
 import UIKit
 import CoreData
-
+/**
+ Сервис с методами доступа к хранилищу
+ */
 class CoreDataService {
     
     private let container = AppDelegate().persistentContainer

@@ -10,7 +10,5 @@
 import Foundation
 import CoreData
 
-
 public class Song: NSManagedObject {
-
 }

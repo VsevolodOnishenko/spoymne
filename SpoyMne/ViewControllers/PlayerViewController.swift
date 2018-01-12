@@ -8,8 +8,10 @@
 
 import UIKit
 import AVFoundation
-
-class PlayerViewController: BaseViewController {
+/**
+ Класс отвечает за экран отображения плеера
+*/
+final class PlayerViewController: BaseViewController {
     
     @IBOutlet private var successView: UIView!
     
@@ -29,7 +31,7 @@ class PlayerViewController: BaseViewController {
     }
     var song: SongModel?
     private var audioPlayer = AVAudioPlayer()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSongImage()
@@ -37,8 +39,10 @@ class PlayerViewController: BaseViewController {
         guard let songToPlay = song else { return }
         configurePlayer(with: songToPlay)
     }
-
-    func configurePlayer(with songToPlay: SongModel) {
+    /**
+     Конфигурация и запуск плеера
+    */
+    private func configurePlayer(with songToPlay: SongModel) {
         do {
             audioPlayer = try AVAudioPlayer(data: songToPlay.songUrl.getDataFromUrl())
             songDurationLabel.text = convertSongDuration(for: audioPlayer.duration)
@@ -50,14 +54,19 @@ class PlayerViewController: BaseViewController {
             print(error)
         }
     }
-
+    /**
+     Функция, осуществляющая переход на страницу с плэйлистом пользователя
+    */
     private func openPlaylist() {
         let s = storyboard?.instantiateViewController(withIdentifier: "FavoriteSongsCollection")
         guard let playlistView = s as? FavoriteSongsCollection else { return }
         playlistView.delegate = self
         navigationController?.pushViewController(playlistView, animated: true)
     }
-    
+    //MARK: Configurations methods
+    /**
+     Конфигурация обложки песни
+    */
     private func configureSongImage(){
         songLogo.contentMode = .scaleAspectFit
         songLogo.layer.shadowColor = UIColor.black.cgColor
@@ -65,13 +74,46 @@ class PlayerViewController: BaseViewController {
         songLogo.layer.shadowOffset = CGSize.zero
         songLogo.layer.shadowRadius = 10
     }
-    
+    /**
+     Конфигурация представления песни
+     */
     private func configureSongPresentation(songToPlay: SongModel) {
         songLogo.image = UIImage(data: songToPlay.songImage.getDataFromUrl())
         songNameLabel.text = songToPlay.songName
         artistNameLabel.text = songToPlay.artistName
     }
-    
+    /**
+     Конфигурация вью, которое уведомляет пользователя
+     об успешном занесении песни в плэйлист
+     */
+    private func configureSuccessView() {
+        successView.layer.cornerRadius = 10
+    }
+    /**
+     Конфигурация представления продолжительности песни
+     */
+    private func convertSongDuration(for duration: Double) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.minute, .second]
+        formatter.zeroFormattingBehavior = [.pad]
+
+        guard let convertedDuration = formatter.string(from: duration) else { return "0:00" }
+        return convertedDuration
+    }
+    /**
+     Конфигурация проигрываемого времени и изменения слайдера
+     */
+    private func alreadyPlaying() {
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] (timer) in
+            guard let playing = self?.audioPlayer.currentTime,
+                let currentTime = self?.audioPlayer.currentTime else { return }
+            self?.songTimerLabel.text = self?.convertSongDuration(for:Double(playing))
+            self?.songDurationSlider.value = Float(currentTime)
+        }
+    }
+
+    // MARK: IBActions
     @IBAction private func playButtonPressed(_ sender: Any) {
         audioPlayer.play()
     }
@@ -79,7 +121,9 @@ class PlayerViewController: BaseViewController {
     @IBAction private func pauseButtonPressed(_ sender: Any) {
         audioPlayer.pause()
     }
-    
+    /**
+     Сохрание песни в хранилище
+    */
     @IBAction private func addToFavoriteButtonPressed(_ sender: Any) {
         guard let favoriteSong = song else { return }
         let storage = CoreDataService()
@@ -94,11 +138,22 @@ class PlayerViewController: BaseViewController {
     @IBAction private func closeSuccessViewButtonPressed(_ sender: Any) {
         animateOut()
     }
-    
-    private func configureSuccessView() {
-        successView.layer.cornerRadius = 10
+    /**
+     Функция, осуществляющая изменения проигрываемого времени
+     с помощью слайдера
+    */
+    @IBAction private func changeAudioTime(_ sender: Any) {
+        audioPlayer.pause()
+        audioPlayer.currentTime = TimeInterval(songDurationSlider.value)
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
     }
-    
+
+    //MARK: Animation
+    /*
+    Данный блок настраивает анимацию появления и исчезновения
+    вью успешного добавления трека в хранилище
+    */
     private func animateOut() {
         UIView.animate(withDuration: 0.3, animations: {
             self.successView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
@@ -107,7 +162,7 @@ class PlayerViewController: BaseViewController {
             self.successView.removeFromSuperview()
         }
     }
-    
+
     private func animateIn() {
         self.view.addSubview(successView)
         successView.center = self.view.center
@@ -117,32 +172,6 @@ class PlayerViewController: BaseViewController {
             self.successView.alpha = 1
             self.successView.transform = CGAffineTransform.identity
         }, completion: nil)
-    }
-    
-    private func convertSongDuration(for duration: Double) -> String {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .positional
-        formatter.allowedUnits = [.minute, .second]
-        formatter.zeroFormattingBehavior = [.pad]
-        
-        guard let convertedDuration = formatter.string(from: duration) else { return "0:00" }
-        return convertedDuration
-    }
-    
-    private func alreadyPlaying() {
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] (timer) in
-            guard let playing = self?.audioPlayer.currentTime,
-                let currentTime = self?.audioPlayer.currentTime else { return }
-            self?.songTimerLabel.text = self?.convertSongDuration(for:Double(playing))
-            self?.songDurationSlider.value = Float(currentTime)
-        }
-    }
-    
-    @IBAction private func changeAudioTime(_ sender: Any) {
-        audioPlayer.pause()
-        audioPlayer.currentTime = TimeInterval(songDurationSlider.value)
-        audioPlayer.prepareToPlay()
-        audioPlayer.play()
     }
 }
 

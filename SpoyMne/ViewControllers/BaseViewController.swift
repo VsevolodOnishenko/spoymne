@@ -7,8 +7,10 @@
 //
 
 import UIKit
-
-class BaseViewController: UIViewController {
+/**
+Класс отвечает за общую настройку всех экранов
+*/
+class BaseViewController: UIViewController, UINavigationControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
